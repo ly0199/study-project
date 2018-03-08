@@ -10,12 +10,12 @@ public class LazySingletonTwo {
     private LazySingletonTwo() {
     }
 
-    private static LazySingletonTwo INSTANCE = null;
+    private static LazySingletonTwo instance = null;
 
     public static synchronized LazySingletonTwo getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new LazySingletonTwo();
+        if (instance == null) {
+            instance = new LazySingletonTwo();
         }
-        return INSTANCE;
+        return instance;
     }
 }

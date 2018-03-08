@@ -10,14 +10,19 @@ public class LazySingletonOne {
     private LazySingletonOne() {
     }
 
-    private static LazySingletonOne INSTANCE = null;
+    private static LazySingletonOne instance = null;
 
     public static LazySingletonOne getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new LazySingletonOne();
+        if (instance == null) {
+            instance = new LazySingletonOne();
         }
-        return INSTANCE;
+        return instance;
     }
 
+
+    /* 如果该对象被用于序列化，可以保证对象在序列化前后保持一致 */
+//    public Object readResolve() {
+//        return instance;
+//    }
 
 }

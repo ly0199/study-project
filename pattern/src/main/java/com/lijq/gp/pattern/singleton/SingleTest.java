@@ -3,9 +3,11 @@ package com.lijq.gp.pattern.singleton;
 import com.lijq.gp.pattern.singleton.hungry.HungrySingleton;
 import com.lijq.gp.pattern.singleton.lazy.LazySingletonOne;
 import com.lijq.gp.pattern.singleton.lazy.LazySingletonTwo;
+import com.lijq.gp.pattern.singleton.register.RegisterSingleton;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Lijq
@@ -19,23 +21,29 @@ public class SingleTest {
      * 线程安全
      */
     @Test
-    public void hungryTest() {
+    public void hungryTest() throws InterruptedException {
         int count = 100;
         CountDownLatch latch = new CountDownLatch(count);
 
         for (int i = 0; i < count; i++) {
             new Thread(() -> {
+                try {
+                    // 获取实例前将线程等待
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 HungrySingleton singleton = HungrySingleton.getInstance();
                 System.out.println(singleton);
-                latch.countDown();
+
             }).start();
+
+            // 每次循环 countDownji
+            latch.countDown();
         }
 
-        try {
-            latch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("wait......");
+        latch.await(10, TimeUnit.SECONDS);
     }
 
 
@@ -50,6 +58,11 @@ public class SingleTest {
 
         for (int i = 0; i < count; i++) {
             new Thread(() -> {
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 LazySingletonOne singleton = LazySingletonOne.getInstance();
                 //System.out.println(singleton);
                 latch.countDown();
@@ -57,7 +70,7 @@ public class SingleTest {
         }
 
         try {
-            latch.await();
+            latch.await(10, TimeUnit.SECONDS);
             long end = System.currentTimeMillis();
             System.out.println("耗时：" + (end - start));
         } catch (InterruptedException e) {
@@ -67,26 +80,54 @@ public class SingleTest {
 
 
     @Test
-    public void lazyTestTow() {
-        // 增大 count 可以明显看出 方法块上 加 sync 造成的代码效率影响
+    public void lazyTestTow() throws InterruptedException {
         int count = 20000;
         CountDownLatch latch = new CountDownLatch(count);
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < count; i++) {
             new Thread(() -> {
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 LazySingletonTwo singleton = LazySingletonTwo.getInstance();
                 //System.out.println(singleton);
-                latch.countDown();
             }).start();
+            latch.countDown();
         }
 
-        try {
-            latch.await();
-            long end = System.currentTimeMillis();
-            System.out.println("耗时：" + (end - start));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        latch.await(10, TimeUnit.SECONDS);
+        long end = System.currentTimeMillis();
+        System.out.println("耗时：" + (end - start));
+    }
+
+    /**
+     * 注册式单例
+     * @throws InterruptedException
+     */
+    @Test
+    public void registerTest() throws InterruptedException {
+        int count = 200;
+        CountDownLatch latch = new CountDownLatch(count);
+
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < count; i++) {
+            new Thread(() -> {
+                try {
+                    latch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                RegisterSingleton singleton = RegisterSingleton.getInstance();
+                System.out.println(singleton);
+            }).start();
+            latch.countDown();
         }
+
+        latch.await(10, TimeUnit.SECONDS);
+        long end = System.currentTimeMillis();
+        System.out.println("耗时：" + (end - start));
     }
 }
