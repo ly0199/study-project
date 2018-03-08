@@ -1,7 +1,7 @@
 package com.lijq.gp.pattern.factory.abs;
 
 
-import com.lijq.gp.pattern.factory.ICart;
+import com.lijq.gp.pattern.factory.ISender;
 
 /**
  * @author Lijq
@@ -9,8 +9,5 @@ import com.lijq.gp.pattern.factory.ICart;
  */
 public abstract class AbstractFactory {
 
-    public abstract ICart getBmw();
-
-    public abstract ICart getBenz();
-
+    public abstract ISender produce();
 }

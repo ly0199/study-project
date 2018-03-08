@@ -1,8 +1,8 @@
 package com.lijq.gp.pattern.factory.simple;
 
-import com.lijq.gp.pattern.factory.Benz;
-import com.lijq.gp.pattern.factory.Bmw;
-import com.lijq.gp.pattern.factory.ICart;
+import com.lijq.gp.pattern.factory.ISender;
+import com.lijq.gp.pattern.factory.MailSender;
+import com.lijq.gp.pattern.factory.SmsSender;
 
 /**
  * @author Lijq
@@ -11,13 +11,14 @@ import com.lijq.gp.pattern.factory.ICart;
 public class SimpleFactory {
 
 
-    public ICart getCart(String name) {
+    public ISender produce(String type) {
 
-        if ("宝马".equals(name)) {
-            return new Bmw();
-        } else if ("奔驰".equals(name)) {
-            return new Benz();
+        if ("mail".equals(type)) {
+            return new MailSender();
+        } else if ("sms".equals(type)) {
+            return new SmsSender();
         } else {
+            System.out.println("type:[" + type + "] 没有对应实现");
             return null;
         }
 

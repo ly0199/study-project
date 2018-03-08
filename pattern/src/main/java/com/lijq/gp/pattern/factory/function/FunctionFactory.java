@@ -1,8 +1,7 @@
 package com.lijq.gp.pattern.factory.function;
 
-import com.lijq.gp.pattern.factory.Benz;
-import com.lijq.gp.pattern.factory.Bmw;
-import com.lijq.gp.pattern.factory.ICart;
+import com.lijq.gp.pattern.factory.MailSender;
+import com.lijq.gp.pattern.factory.SmsSender;
 
 /**
  * @author Lijq
@@ -10,12 +9,11 @@ import com.lijq.gp.pattern.factory.ICart;
  */
 public class FunctionFactory {
 
-    public ICart getBmw() {
-        return new Bmw();
+    public MailSender produceMail() {
+        return new MailSender();
     }
 
-    public ICart getBenz() {
-        return new Benz();
+    public SmsSender produceSms() {
+        return new SmsSender();
     }
-
 }
