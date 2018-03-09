@@ -4,12 +4,15 @@ package com.lijq.gp.pattern.singleton.lazy;
  * @author Lijq
  * @date 2018/3/7 23:06
  * @descript
+ *  懒汉式单例模式
+ *      线程不安全
  */
 public class LazySingletonOne {
 
     private LazySingletonOne() {
     }
 
+    // 静态块，公共内存区域
     private static LazySingletonOne instance = null;
 
     public static LazySingletonOne getInstance() {

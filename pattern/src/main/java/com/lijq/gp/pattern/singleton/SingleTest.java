@@ -1,11 +1,14 @@
 package com.lijq.gp.pattern.singleton;
 
+import com.lijq.gp.pattern.singleton.holder.Singleton;
 import com.lijq.gp.pattern.singleton.hungry.HungrySingleton;
 import com.lijq.gp.pattern.singleton.lazy.LazySingletonOne;
 import com.lijq.gp.pattern.singleton.lazy.LazySingletonTwo;
 import com.lijq.gp.pattern.singleton.register.RegisterSingleton;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -129,5 +132,12 @@ public class SingleTest {
         latch.await(10, TimeUnit.SECONDS);
         long end = System.currentTimeMillis();
         System.out.println("耗时：" + (end - start));
+    }
+
+
+    @Test
+    public void testMapPut(){
+        Map<String, Singleton> maps = new HashMap<>();
+        System.out.println(maps.put("a", Singleton.getInstance()));
     }
 }

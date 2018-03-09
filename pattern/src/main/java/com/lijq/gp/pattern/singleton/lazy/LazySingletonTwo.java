@@ -12,6 +12,7 @@ public class LazySingletonTwo {
 
     private static LazySingletonTwo instance = null;
 
+    // 同步锁
     public static synchronized LazySingletonTwo getInstance() {
         if (instance == null) {
             instance = new LazySingletonTwo();
