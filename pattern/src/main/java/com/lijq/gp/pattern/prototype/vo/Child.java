@@ -1,8 +1,5 @@
 package com.lijq.gp.pattern.prototype.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.Serializable;
 
 /**
@@ -10,10 +7,25 @@ import java.io.Serializable;
  * @date 2018/3/8 15:42
  * @description
  */
-@Getter
-@Setter
-public class Child implements Serializable{
+
+public class Child implements Serializable {
 
     private String name;
     private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 }

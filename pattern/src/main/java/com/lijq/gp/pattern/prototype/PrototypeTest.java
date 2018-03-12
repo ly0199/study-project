@@ -36,6 +36,8 @@ public class PrototypeTest {
 
         authors.add("母亲");
 
+        System.out.println();
+
         System.out.println(JSON.toJSONString(book1));
     }
 

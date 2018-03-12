@@ -1,8 +1,5 @@
 package com.lijq.gp.pattern.prototype.vo;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +9,7 @@ import java.util.List;
  * @date 2018/3/8 15:18
  * @description
  */
-@Setter
-@Getter
+
 public class Family implements Cloneable, Serializable {
 
     private String father;
@@ -45,5 +41,29 @@ public class Family implements Cloneable, Serializable {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getFather() {
+        return father;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
+    }
+
+    public String getMother() {
+        return mother;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    public List<Child> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Child> children) {
+        this.children = children;
     }
 }
