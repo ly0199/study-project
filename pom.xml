@@ -10,6 +10,8 @@
     <modules>
         <module>pattern</module>
         <module>algorithm</module>
+        <module>mybatis-source</module>
+        <module>mybatis-generator</module>
     </modules>
     <packaging>pom</packaging>
 
